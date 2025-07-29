@@ -1,0 +1,10 @@
+<header>
+  <h1><%= title %></h1>
+  <nav>
+    <ul>
+      <% navigation_items.each do |item| %>
+        <li><a href="<%= item[:url] %>"><%= item[:text] %></a></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>

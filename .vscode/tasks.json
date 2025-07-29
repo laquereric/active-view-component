@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Test Gem",
+			"type": "shell",
+			"command": "bundle exec rspec",
+			"group": "test",
+			"problemMatcher": [
+				"$ruby"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Build Gem",
+			"type": "shell",
+			"command": "gem build active-view-component.gemspec",
+			"group": "build",
+			"problemMatcher": [],
+			"isBackground": false
+		},
+		{
+			"label": "Install Dependencies",
+			"type": "shell",
+			"command": "bundle install",
+			"group": "build",
+			"problemMatcher": [],
+			"isBackground": false
+		}
+	]
+}
