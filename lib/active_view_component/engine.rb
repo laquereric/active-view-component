@@ -11,13 +11,13 @@ module ActiveViewComponent
     end
     
     initializer "active_view_component.initialize" do
-      ActiveSupport.on_load(:action_controller) do
-        include ActiveViewComponent::ControllerExtensions
-      end
+      #ActiveSupport.on_load(:action_controller) do
+      #  include ActiveViewComponent::ControllerExtensions
+      #end
       
-      ActiveSupport.on_load(:action_view) do
-        include ActiveViewComponent::ViewHelpers
-      end
+      #ActiveSupport.on_load(:action_view) do
+      #  include ActiveViewComponent::ViewHelpers
+      #end
     end
   end
 end

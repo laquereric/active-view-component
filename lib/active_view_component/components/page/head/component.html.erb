@@ -1,0 +1,39 @@
+  <head>
+    <title><%= @base_props.title %></title>
+    <%= render( Page::Head::Meta::Component.from(@component) ) %>
+
+    <!-- Default stylesheets -->
+    <% unless defined?(RSpec) %>
+      <% begin %>
+        <%= helpers.stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <%= helpers.javascript_importmap_tags %>
+      <% rescue Propshaft::MissingAssetError %>
+        <!-- Assets not available -->
+      <% end %>
+    <% end %>
+
+    <!-- Additional stylesheets -->
+    <% @component.style.stylesheets.each do |stylesheet| %>
+      <link rel="stylesheet" href="<%= stylesheet %>">
+    <% end %>
+
+    <!-- Inline styles -->
+    <style>
+      <%= @style.inline_styles.html_safe %>
+    </style>
+
+    <!-- Additional scripts -->
+    <% @component.style.scripts.each do |script| %>
+      <script src="<%= script %>"></script>
+    <% end %>
+
+    <!-- Inline scripts -->
+    <script>
+      <%= @component.style.scripts.each do |script| %>
+        <%= script.html_safe %>
+      <% end %>
+    </script>
+  </head>
+  
+  
+

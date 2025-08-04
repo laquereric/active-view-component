@@ -1,0 +1,13 @@
+<html lang="<%= @style.lang %>" dir="<%= @style.dir %>" <%= @style.html_attributes.map { |key, value| "#{key}=\"#{value}\"" }.join(' ').html_safe %>>
+
+  <%= render( Page::Head::Component.from(@component) ) do |c|
+        c.set_props do |p|
+          p.title = "aTitle"
+        end
+      end
+  %>
+
+  <%= render( Page::Body::Component.from(@component) )
+  %>
+
+</html>
