@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 module ActiveViewComponent
-  module Page
-    module Head
-  
-      # Head Component for managing page head section
-      class Component < Base::Component
-        def self.props_class
-          Props
+  module Components
+    module Page
+      module Head
+        class Component < ActiveViewComponent::Core::Facet::Component
         end
       end
     end

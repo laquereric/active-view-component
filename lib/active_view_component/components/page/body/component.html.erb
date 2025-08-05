@@ -1,4 +1,7 @@
-<body class="<%= @component.style.class %>" >
-  # < %= data_attributes.map { |key, value| "data-#{key}=\"#{value}\"" }.join(' ').html_safe %>>
-  <%= content %>
+<body>
+  Body<br/>
+  Title: <%= props[:title] %>
+  <!-- class="< % = @component.style.class %>" -->
+  <!-- < %= data_attributes.map { |key, value| "data-#{key}=\"#{value}\"" }.join(' ').html_safe -->
+  <!-- < %= @content %> -->
 </body>

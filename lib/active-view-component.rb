@@ -6,14 +6,25 @@ require "view_component"
 
 require_relative "active_view_component/version"
 require_relative "active_view_component/engine"
-require_relative "active_view_component/components/base/component"
-require_relative "active_view_component/components/base/props"
-require_relative "active_view_component/components/base/style"
-require_relative "active_view_component/components/page/component"
-require_relative "active_view_component/components/base/props"
-require_relative "active_view_component/components/page/head/component"
+
+require_relative "active_view_component/core/facet/component"
+require_relative "active_view_component/core/facet/props"
+require_relative "active_view_component/core/facet/style"
+require_relative "active_view_component/core/node"
+
 require_relative "active_view_component/components/page/head/meta/component"
+require_relative "active_view_component/components/page/head/meta/props"
+
+require_relative "active_view_component/components/page/head/component"
+require_relative "active_view_component/components/page/head/props"
+
+require_relative "active_view_component/components/page/body/component"
+require_relative "active_view_component/components/page/body/props"
+
+require_relative "active_view_component/components/page/component"
 require_relative "active_view_component/components/page/props"
+
+
 
 #require_relative "active_view_component/renderer"
 #require_relative "active_view_component/tree_builder"

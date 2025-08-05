@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 module ActiveViewComponent
-  module Page
-    module Head
-      module Meta
-        # Meta Component for managing meta tags
-        class Component < Base::Component
-          def self.props_class
-            Props
+  module Components
+    module Page
+      module Head
+        module Meta
+          class Component < ActiveViewComponent::Core::Facet::Component
           end
         end
       end

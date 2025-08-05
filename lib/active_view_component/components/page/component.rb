@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 module ActiveViewComponent
-  module Page
-  
-# HTML Component for managing the top-level HTML wrapper
-class Component < Base::Component
-  def self.props_class
-    Props
+  module Components
+    module Page
+      class Component < ActiveViewComponent::Core::Facet::Component
+      end
+    end
   end
 end
-end
-end
-

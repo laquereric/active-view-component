@@ -1,13 +1,20 @@
-<html lang="<%= @style.lang %>" dir="<%= @style.dir %>" <%= @style.html_attributes.map { |key, value| "#{key}=\"#{value}\"" }.join(' ').html_safe %>>
+<!--  lang="< % = @style.lang %>" dir="< % = @style.dir %>" < % = @style.html_attributes.map { |key, value| "#{key}=\"#{value}\"" }.join(' ').html_safe %>> -->
+<html>
 
-  <%= render( Page::Head::Component.from(@component) ) do |c|
-        c.set_props do |p|
-          p.title = "aTitle"
-        end
-      end
-  %>
+    <%= 
+      render(self.children[0])
+    %>
+    <br/>
+    <%= 
+      render(self.children[1])
+    %>
 
-  <%= render( Page::Body::Component.from(@component) )
-  %>
+<!--
+  < % = 
+    render( @component.with_body_content ) do |body_component|
+      body_component.props = body_props
+    end
+  % >
+  -->
 
 </html>

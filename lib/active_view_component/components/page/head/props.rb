@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 module ActiveViewComponent
-class Page::Head::Props
-  attr_accessor :title
-
-  # Initializes the head properties for the page component
-  def initialize(title:)
-    @title = title
+  module Components
+    module Page
+      module Head 
+        class Props < ActiveViewComponent::Core::Facet::Props
+          attr_accessor :title
+        end
+      end
+    end
   end
-end
 end
