@@ -3,6 +3,19 @@ module ActiveViewComponent
   module Core
     module Facet
       class Component < ViewComponent::Base
+        attr_accessor :parent, :children
+        
+        def prepare(parent:nil)
+          @parent = parent if parent
+          prepare_children(parent:self)
+        end
+
+        def prepare_children(parent:nil)
+          @children ||= []
+          
+          # Prepare the children if they respond to prepare
+          @children.each { |child| child.prepare(parent: self) }
+        end
       end
     end
   end

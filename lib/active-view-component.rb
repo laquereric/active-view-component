@@ -24,7 +24,7 @@ require_relative "active_view_component/components/page/body/props"
 require_relative "active_view_component/components/page/component"
 require_relative "active_view_component/components/page/props"
 
-
+require_relative "active_view_component/page_generator"
 
 #require_relative "active_view_component/renderer"
 #require_relative "active_view_component/tree_builder"
