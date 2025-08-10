@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+require_relative "../lib/active-view-component"
+
 RSpec.describe ActiveViewComponent do
   it "has a version number" do
     expect(ActiveViewComponent::VERSION).not_to be nil

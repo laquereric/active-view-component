@@ -26,6 +26,9 @@ require_relative "active_view_component/components/page/props"
 
 require_relative "active_view_component/page_generator"
 
+# Load Base class from junk for now (will move later)
+require_relative "active_view_component/junk/base"
+
 #require_relative "active_view_component/renderer"
 #require_relative "active_view_component/tree_builder"
 #require_relative "active_view_component/controller_extensions"

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require_relative "../../lib/active-view-component"
 
 RSpec.describe ActiveViewComponent::Base do
   # This is a minimal test since we can't run full ActiveRecord without Rails

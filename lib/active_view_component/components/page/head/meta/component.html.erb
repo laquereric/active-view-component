@@ -1,22 +1,23 @@
 Meta
-<!--
-<meta charset="< %= @component.props.styles.charset %>">
-<meta name="viewport" content=" %= @component.props.styles.viewport %>">
+<meta name="author" content="<%= author %>">
+<meta charset="<%= charset %>">
 
-<meta name="description" content="< %= @component.props.base_props.description %>">
-<meta name="keywords" content="< %= @component.props.base_props.keywords %>">
-<meta name="author" content="< %= @component.props.base_props.author %>">
+<meta name="viewport" content="<%=viewport %>">
 
-<meta name="robots" content="< %= @base_props.robots %>">
+<meta name="description" content="<%= description %>">
+<meta name="keywords" content="<%= keywords %>">
 
-<meta property="og:title" content="< %= @base_props.og_title %>">
-<meta property="og:description" content="< %= @base_props.og_description %>">
-<meta property="og:image" content="< %= @base_props.og_image %>">
-<meta property="og:url" content="< %= @base_props.og_url %>">
 
-<meta name="twitter:card" content="< %= @base_props.twitter_card %>">
+<meta name="robots" content="<%= @robots %>">
 
-< % @base_props.custom_meta.each do |name, content| %>
-  <meta name="< %= name %>" content="< %= content %>">
-< % end %> 
--->
+<meta property="og:title" content="<%= @og_title %>">
+<meta property="og:description" content="<%= @og_description %>">
+<meta property="og:image" content="<%= @og_image %>">
+<meta property="og:url" content="<%= @og_url %>">
+
+<meta name="twitter:card" content="<%= @twitter_card %>">
+
+<% @custom_meta.each do |name, content| %>
+  <meta name="<%= name %>" content="<%= content %>">
+<% end %> 
+
