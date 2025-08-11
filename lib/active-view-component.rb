@@ -24,7 +24,7 @@ require_relative "active_view_component/components/page/body/props"
 require_relative "active_view_component/components/page/component"
 require_relative "active_view_component/components/page/props"
 
-require_relative "active_view_component/page_generator"
+require_relative "generators/active_view_component/page_generator"
 
 # Load Base class from junk for now (will move later)
 require_relative "active_view_component/junk/base"

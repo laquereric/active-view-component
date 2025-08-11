@@ -6,32 +6,15 @@ module ActiveViewComponent
       module Head
         module Meta
           class Component < ActiveViewComponent::Core::Facet::Component
-            attr_accessor :robots, :keywords, :description, :author, :charset, :viewport, :twitter_card, :custom_meta
+            attr_accessor :robots, :keywords, :description, :author, :charset, :viewport, :twitter_card, :custom_meta,
+                          :og_title, :og_description
 
-            def initialize(
-              description: "Desc",
-              author: "me",
-              charset: "UTF-8",
-              viewport: "width=device-width, initial-scale=1",
-              robots: "index, follow",
-              twitter_card: "summary",
-              custom_meta: {},
-              keywords: nil,
-              og_title: nil,
-              og_description: nil,
-              **_options
-            )
+            def initialize(**options)
               super()
-              @description = description
-              @author = author
-              @charset = charset
-              @viewport = viewport
-              @robots = robots
-              @twitter_card = twitter_card
-              @keywords = keywords
-              @og_title = og_title
-              @og_description = og_description
-              @custom_meta = custom_meta || {}
+              # Initialize from options passed by the generator
+              options.each do |key, value|
+                instance_variable_set("@#{key}", value) if respond_to?("#{key}=")
+              end
             end
           end
         end
