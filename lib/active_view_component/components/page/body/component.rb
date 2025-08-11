@@ -7,10 +7,12 @@ module ActiveViewComponent
         class Component < ActiveViewComponent::Core::Facet::Component
           attr_accessor :body_class, :data_attributes
 
-          def initialize(body_class: nil, data_attributes: {}, **_options)
+          def initialize(**options)
             super()
-            @body_class = body_class
-            @data_attributes = data_attributes || {}
+            # Initialize from options passed by the generator
+            options.each do |key, value|
+              instance_variable_set("@#{key}", value) if respond_to?("#{key}=")
+            end
           end
         end
       end

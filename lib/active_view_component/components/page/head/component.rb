@@ -7,22 +7,12 @@ module ActiveViewComponent
         class Component < ActiveViewComponent::Core::Facet::Component
           attr_accessor :title, :stylesheets, :scripts, :inline_styles, :inline_scripts, :meta_options
 
-          def initialize(
-            title: nil,
-            stylesheets: [],
-            scripts: [],
-            inline_styles: nil,
-            inline_scripts: nil,
-            meta_options: {},
-            **_options
-          )
+          def initialize(**options)
             super()
-            @title = title
-            @stylesheets = stylesheets || []
-            @scripts = scripts || []
-            @inline_styles = inline_styles
-            @inline_scripts = inline_scripts
-            @meta_options = meta_options || {}
+            # Initialize from options passed by the generator
+            options.each do |key, value|
+              instance_variable_set("@#{key}", value) if respond_to?("#{key}=")
+            end
           end
         end
       end

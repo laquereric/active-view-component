@@ -6,26 +6,12 @@ module ActiveViewComponent
       class Component < ActiveViewComponent::Core::Facet::Component
         attr_accessor :title, :body_class, :lang, :dir, :meta_options, :html_attributes, :data_attributes, :show_header
 
-        def initialize(
-          title: nil,
-          body_class: nil,
-          lang: "en",
-          dir: "ltr",
-          meta_options: {},
-          html_attributes: {},
-          data_attributes: {},
-          show_header: true,
-          **_options
-        )
+        def initialize(**options)
           super()
-          @title = title
-          @body_class = body_class
-          @lang = lang
-          @dir = dir
-          @meta_options = meta_options || {}
-          @html_attributes = html_attributes || {}
-          @data_attributes = data_attributes || {}
-          @show_header = show_header
+          # Initialize from options passed by the generator
+          options.each do |key, value|
+            instance_variable_set("@#{key}", value) if respond_to?("#{key}=")
+          end
         end
       end
     end
