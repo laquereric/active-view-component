@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module ActiveViewComponent
   module Components
     module Page
@@ -6,10 +7,10 @@ module ActiveViewComponent
         module Meta
           class Component < ActiveViewComponent::Core::Facet::Component
             attr_accessor :robots, :keywords, :description, :author, :charset, :viewport, :twitter_card, :custom_meta
-            
+
             def initialize(
               description: "Desc",
-              author: "me", 
+              author: "me",
               charset: "UTF-8",
               viewport: "width=device-width, initial-scale=1",
               robots: "index, follow",

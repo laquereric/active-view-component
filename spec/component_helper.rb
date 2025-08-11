@@ -8,7 +8,7 @@ module Rails
   def self.env
     "test"
   end
-  
+
   def self.root
     Pathname.new(File.expand_path("..", __dir__))
   end
@@ -22,9 +22,9 @@ RSpec.configure do |config|
       # Since we don't have a full Rails environment, we'll just test that the component can be instantiated
       # and responds to basic methods
       @rendered_content = "mock rendered content for #{component.class.name}"
-      if block_given?
-        @rendered_content += " with block content"
-      end
+      return unless block_given?
+
+      @rendered_content += " with block content"
     end
 
     def page
@@ -37,11 +37,11 @@ class PageStub
   def initialize(content)
     @content = content.to_s
   end
-  
+
   def have_selector(selector)
     SelectorMatcher.new(selector)
   end
-  
+
   def have_content(content)
     ContentMatcher.new(content)
   end
@@ -51,7 +51,7 @@ class SelectorMatcher
   def initialize(selector)
     @selector = selector
   end
-  
+
   def matches?(_page)
     # For mock testing, we'll just return true since we're testing component instantiation
     true
@@ -62,7 +62,7 @@ class ContentMatcher
   def initialize(content)
     @content = content
   end
-  
+
   def matches?(page)
     # For mock testing, we'll check if the content includes our component name or block content
     page_content = page.instance_variable_get(:@content)
