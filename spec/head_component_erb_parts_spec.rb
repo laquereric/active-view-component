@@ -42,47 +42,11 @@ RSpec.describe ActiveViewComponent::Components::Page::Head::Component do
       expect(component.viewport).to eq("width=1024")
     end
 
-    it "defines erb_node nodes" do
-      expect(component).to respond_to(:meta)
-      expect(component).to respond_to(:meta=)
-      expect(component).to respond_to(:meta?)
-      expect(component).to respond_to(:render_meta)
-
-      expect(component).to respond_to(:stylesheets)
-      expect(component).to respond_to(:stylesheets=)
-      expect(component).to respond_to(:stylesheets?)
-      expect(component).to respond_to(:render_stylesheets)
-      expect(component).to respond_to(:add_stylesheet)
-
-      expect(component).to respond_to(:scripts)
-      expect(component).to respond_to(:scripts=)
-      expect(component).to respond_to(:scripts?)
-      expect(component).to respond_to(:render_scripts)
-      expect(component).to respond_to(:add_script)
-    end
-
-    it "handles multiple node collections" do
-      component.add_stylesheet("style1.css")
-      component.add_stylesheet("style2.css")
-      expect(component.stylesheets).to eq(["style1.css", "style2.css"])
-
-      component.add_script("script1.js")
-      component.add_script("script2.js")
-      expect(component.scripts).to eq(["script1.js", "script2.js"])
-    end
-
-    it "provides metadata about erb attributes and nodes" do
+    it "provides metadata about erb attributes" do
       attributes = described_class.erb_attributes
       expect(attributes).to have_key(:title)
       expect(attributes).to have_key(:charset)
       expect(attributes).to have_key(:viewport)
-
-      nodes = described_class.erb_nodes
-      expect(nodes).to have_key(:meta)
-      expect(nodes).to have_key(:stylesheets)
-      expect(nodes).to have_key(:scripts)
-      expect(nodes[:stylesheets][:multiple]).to be_truthy
-      expect(nodes[:scripts][:multiple]).to be_truthy
     end
   end
 end

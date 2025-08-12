@@ -13,11 +13,6 @@ class MyComponent < ActiveViewComponent::Core::Facet::Component
   erb_attr :count, type: :integer
   erb_attr :visible, type: :boolean, default: true
   erb_attr :description  # No type coercion, accepts any value
-
-  # Define ERB nodes for child components or content
-  erb_node :header, component_class: HeaderComponent
-  erb_node :items, multiple: true  # Allow multiple items
-  erb_node :footer, default_content: "<footer>Default Footer</footer>"
 end
 ```
 
@@ -46,41 +41,6 @@ puts component.visible  # true
 puts component.title?   # true (attribute is set)
 ```
 
-## ERB Nodes (`erb_node`)
-
-### Features:
-- **Single vs Multiple**: Support for single nodes or collections
-- **Component Integration**: Can specify component classes for rendering
-- **Default Content**: Provide fallback content when node is empty
-- **Render Methods**: Automatic `render_*` methods for each node
-
-### Single Node Example:
-```ruby
-erb_node :header, component_class: HeaderComponent
-
-# Usage:
-component.header = { title: "My Header", level: 2 }
-rendered = component.render_header  # Renders HeaderComponent with the hash as attributes
-```
-
-### Multiple Nodes Example:
-```ruby
-erb_node :items, multiple: true
-
-# Usage:
-component.items = ["Item 1", "Item 2"]
-component.add_item("Item 3")  # Automatically generated method
-rendered = component.render_items  # Renders all items concatenated
-```
-
-### Default Content Example:
-```ruby
-erb_node :footer, default_content: "<footer>Default Footer</footer>"
-
-# Usage:
-rendered = component.render_footer  # Returns default content if no footer set
-```
-
 ## Real-World Example: Head Component
 
 ```ruby
@@ -91,11 +51,6 @@ class HeadComponent < ActiveViewComponent::Core::Facet::Component
   erb_attr :title, type: :string, default: "Default Page Title"
   erb_attr :charset, type: :string, default: "UTF-8"
   erb_attr :viewport, type: :string, default: "width=device-width, initial-scale=1"
-
-  # Child components and content
-  erb_node :meta, component_class: MetaComponent
-  erb_node :stylesheets, multiple: true
-  erb_node :scripts, multiple: true
 end
 ```
 
@@ -105,16 +60,6 @@ end
   <title><%= title %></title>
   <meta charset="<%= charset %>">
   <meta name="viewport" content="<%= viewport %>">
-  
-  <%= render_meta if meta? %>
-  
-  <% stylesheets.each do |stylesheet| %>
-    <link rel="stylesheet" href="<%= stylesheet %>">
-  <% end %>
-  
-  <% scripts.each do |script| %>
-    <script src="<%= script %>"></script>
-  <% end %>
 </head>
 ```
 
@@ -123,19 +68,15 @@ end
 head = HeadComponent.new
 head.title = "My Page Title"
 head.charset = "UTF-8"
-head.meta = { description: "Page description", keywords: "ruby, rails" }
-head.add_stylesheet("styles.css")
-head.add_stylesheet("theme.css")
-head.add_script("app.js")
+head.viewport = "width=device-width, initial-scale=1"
 ```
 
 ## Introspection
 
-Access metadata about defined attributes and nodes:
+Access metadata about defined attributes:
 
 ```ruby
 MyComponent.erb_attributes  # Returns hash of attribute configurations
-MyComponent.erb_nodes      # Returns hash of node configurations
 
 # Example output:
 # { 

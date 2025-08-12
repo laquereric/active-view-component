@@ -12,11 +12,6 @@ module ActiveViewComponent
           erb_attr :title, type: :string, default: "Default Page Title"
           erb_attr :charset, type: :string, default: "UTF-8"
           erb_attr :viewport, type: :string, default: "width=device-width, initial-scale=1"
-
-          # Define ERB nodes for head content
-          # erb_node :meta, component_class: ActiveViewComponent::Components::Page::Head::Meta::Component
-          # erb_node :stylesheets, multiple: true
-          # erb_node :scripts, multiple: true
         end
       end
     end
