@@ -4,6 +4,13 @@ require "rails"
 require "ancestry"
 require "view_component"
 
+# Load pry for development and testing
+begin
+  require "pry"
+rescue LoadError
+  # Pry not available, continue without it
+end
+
 require_relative "active_view_component/version"
 require_relative "active_view_component/engine"
 
@@ -26,19 +33,10 @@ require_relative "active_view_component/components/page/props"
 
 require_relative "generators/active_view_component/page_generator"
 
-# Load Base class from junk for now (will move later)
-require_relative "active_view_component/junk/base"
-
-# require_relative "active_view_component/renderer"
-# require_relative "active_view_component/tree_builder"
-# require_relative "active_view_component/controller_extensions"
-# require_relative "active_view_component/view_helpers"
-
+# Main module for the ActiveViewComponent gem
+# Provides a new Rails rendering flow that persists rendered pages
+# as component trees in the database
 module ActiveViewComponent
-  # Main module for the ActiveViewComponent gem
-  # Provides a new Rails rendering flow that persists rendered pages
-  # as component trees in the database
-
   class Error < StandardError; end
 
   # Configuration

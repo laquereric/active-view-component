@@ -4,10 +4,9 @@ module ActiveViewComponent
   module Components
     module Page
       module Head
-        module Meta
-          # Component for rendering meta tags in the head section
+        module Link
           class Component < ActiveViewComponent::Core::Facet::Component
-            attr_accessor :viewport, :apple_mobile_web_app_capable, :mobile_web_app_capable
+            # attr_accessor
           end
         end
       end

@@ -28,9 +28,7 @@ RSpec.describe ActiveViewComponent::Components::Page::Head::Meta::Component do
         {
           viewport: "width=device-width, initial-scale=1",
           apple_mobile_web_app_capable: "yes",
-          mobile_web_app_capable: "yes",
-          description: "Test Description",
-          author: "Test Author"
+          mobile_web_app_capable: "yes"
         }
       end
 
@@ -40,8 +38,36 @@ RSpec.describe ActiveViewComponent::Components::Page::Head::Meta::Component do
         expect(component.viewport).to eq("width=device-width, initial-scale=1")
         expect(component.apple_mobile_web_app_capable).to eq("yes")
         expect(component.mobile_web_app_capable).to eq("yes")
-        expect(component.description).to eq("Test Description")
-        expect(component.author).to eq("Test Author")
+      end
+    end
+
+    context "with invalid options" do
+      let(:options) do
+        {
+          viewport: "width=1024",
+          invalid_option: "bad value",
+          another_bad_key: "should be ignored",
+          apple_mobile_web_app_capable: "yes"
+        }
+      end
+
+      let(:component) { described_class.new(**options) }
+
+      it "only sets valid attributes and ignores invalid ones" do
+        expect(component.viewport).to eq("width=1024")
+        expect(component.apple_mobile_web_app_capable).to eq("yes")
+
+        # Invalid options should not be set as instance variables
+        expect(component.instance_variable_defined?(:@invalid_option)).to be_falsey
+        expect(component.instance_variable_defined?(:@another_bad_key)).to be_falsey
+
+        # Component should not respond to invalid attributes
+        expect(component).not_to respond_to(:invalid_option)
+        expect(component).not_to respond_to(:another_bad_key)
+      end
+
+      it "does not raise an error when invalid options are provided" do
+        expect { described_class.new(**options) }.not_to raise_error
       end
     end
   end
@@ -50,26 +76,8 @@ RSpec.describe ActiveViewComponent::Components::Page::Head::Meta::Component do
     let(:component) { described_class.new }
 
     it "provides accessors for all meta attributes" do
-      expect(component).to respond_to(:robots)
-      expect(component).to respond_to(:robots=)
-      expect(component).to respond_to(:keywords)
-      expect(component).to respond_to(:keywords=)
-      expect(component).to respond_to(:description)
-      expect(component).to respond_to(:description=)
-      expect(component).to respond_to(:author)
-      expect(component).to respond_to(:author=)
-      expect(component).to respond_to(:charset)
-      expect(component).to respond_to(:charset=)
       expect(component).to respond_to(:viewport)
       expect(component).to respond_to(:viewport=)
-      expect(component).to respond_to(:twitter_card)
-      expect(component).to respond_to(:twitter_card=)
-      expect(component).to respond_to(:custom_meta)
-      expect(component).to respond_to(:custom_meta=)
-      expect(component).to respond_to(:og_title)
-      expect(component).to respond_to(:og_title=)
-      expect(component).to respond_to(:og_description)
-      expect(component).to respond_to(:og_description=)
       expect(component).to respond_to(:apple_mobile_web_app_capable)
       expect(component).to respond_to(:apple_mobile_web_app_capable=)
       expect(component).to respond_to(:mobile_web_app_capable)
@@ -95,8 +103,6 @@ RSpec.describe ActiveViewComponent::Components::Page::Head::Meta::Component do
         expect(component.viewport).to eq("width=768")
         expect(component.apple_mobile_web_app_capable).to eq("no")
         expect(component.mobile_web_app_capable).to eq("no")
-        expect(component.description).to eq("Desc") # generator default
-        expect(component.author).to eq("me") # generator default
       end
     end
   end

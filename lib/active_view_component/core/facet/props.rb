@@ -1,21 +1,46 @@
 # frozen_string_literal: true
+
 module ActiveViewComponent
   module Core
     module Facet
+      # Props for the component
       class Props < Hash
         attr_accessor :parent, :children
-        #attr_accessor :style, :current_user, :description, :keywords, :author, :lang, :dir, :stylesheets, :scripts, :robots, :title, :og_title, :og_description, :og_image, :og_url, :twitter_card, :custom_meta
-        #def self.from(props:, &block)
-        #  yield self.new if block_given?
-        #end
-        def prepare(parent:nil)
-          @parent = parent if parent
-          prepare_children(parent:self)
+
+        def self.component_class
+          [self.class.module_parent_name, "Component"].join("::").constantize
         end
 
-        def prepare_children(parent:nil)
+        def base_defs
+          @base_defs ||= [
+            %i[initialize prepare prepare_children parent children parent= children=],
+            %i[to_h to_hash []= [] key? fetch dig clear delete delete_if each each_key],
+            %i[each_value empty? eql? except! has_key? has_value? include? invert keep_if],
+            %i[keys length merge! merge rehash reject! select! shift size store to_a update],
+            %i[values values_at]
+          ].flatten
+        end
+
+        def self.component_attribute_keys
+          component_class.instance_methods(false) - base_defs
+        end
+
+        def initialize(**options)
+          super()
+          # Initialize from options passed by the generator
+          options.each do |key, value|
+            instance_variable_set("@#{key}", value) if component_attribute_keys.include?("#{key}=")
+          end
+        end
+
+        def prepare(parent: nil)
+          @parent = parent if parent
+          prepare_children(parent: self)
+        end
+
+        def prepare_children(parent: nil)
           @children ||= []
-          
+
           # Prepare the children if they respond to prepare
           @children.each { |child| child.prepare(parent: self) }
         end

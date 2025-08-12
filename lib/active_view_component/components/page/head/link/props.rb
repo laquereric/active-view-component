@@ -3,7 +3,6 @@ module ActiveViewComponent
     module Page
       module Head
         module Meta
-          # Component for rendering meta tags in the head section
           class Props < ActiveViewComponent::Core::Facet::Props
           end
         end

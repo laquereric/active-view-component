@@ -1,18 +1,28 @@
 # frozen_string_literal: true
+
 module ActiveViewComponent
   module Core
     module Facet
+      # Base class for all components in the ActiveViewComponent framework.
       class Component < ViewComponent::Base
         attr_accessor :parent, :children
-        
-        def prepare(parent:nil)
-          @parent = parent if parent
-          prepare_children(parent:self)
+
+        def initialize(**options)
+          super()
+          # Initialize from options passed by the generator
+          options.each do |key, value|
+            instance_variable_set("@#{key}", value) if respond_to?("#{key}=")
+          end
         end
 
-        def prepare_children(parent:nil)
+        def prepare(parent: nil)
+          @parent = parent if parent
+          prepare_children(parent: self)
+        end
+
+        def prepare_children(parent: nil)
           @children ||= []
-          
+
           # Prepare the children if they respond to prepare
           @children.each { |child| child.prepare(parent: self) }
         end
@@ -20,29 +30,3 @@ module ActiveViewComponent
     end
   end
 end
-      #def self.from(component: comp, &block)
-      #  yield self.new(props: comp.props) if block_given?
-      #end
-
-
-
-      #def set_props(component: self, path: "/", klass: self.class.props_class)
-      #  @props_hash ||= {}
-      #  node_hash = path.split('/').inject(@props_hash) do |acc, part|
-      #    acc[part] = {children: {}} if acc[part].nil?
-      #    acc = acc[part]
-      #  end
-      #  props = klass.new
-      #  node_hash[:parent] = props
-      #  yield props if block_given?
-      #end
-
-      #body_props = Page::Body::Props.from(props: @component.props) do |p|
-      #end
-      #def set_props(&block)
-      #  @props = self.class.props_class.new unless @props
-      #  yield props
-      #  self
-      #end
-
-

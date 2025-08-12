@@ -7,16 +7,7 @@ module ActiveViewComponent
     class Page
       class << self
         def generate(options = {})
-          {
-            title: options[:title],
-            body_class: options[:body_class],
-            lang: options[:lang] || "en",
-            dir: options[:dir] || "ltr",
-            meta_options: options[:meta_options] || {},
-            html_attributes: options[:html_attributes] || {},
-            data_attributes: options[:data_attributes] || {},
-            show_header: options[:show_header].nil? || options[:show_header]
-          }
+          {}
         end
 
         def create_component(options = {})
@@ -47,6 +38,7 @@ module ActiveViewComponent
               node.props = ActiveViewComponent::Components::Page::Props.new
 
               node.children = [
+
                 ActiveViewComponent::Core::Node.new.tap do |head|
                   head.component = ActiveViewComponent::Generator::Page::Html::Head.create_component(head_options)
                   head.props = ActiveViewComponent::Components::Page::Head::Props.new
@@ -62,6 +54,7 @@ module ActiveViewComponent
                   body.component = ActiveViewComponent::Generator::Page::Html::Body.create_component(body_options)
                   body.props = ActiveViewComponent::Components::Page::Body::Props.new
                 end
+
               ]
 
               node.prepare
@@ -73,12 +66,7 @@ module ActiveViewComponent
           class << self
             def generate(options = {})
               {
-                title: options[:title],
-                stylesheets: options[:stylesheets] || [],
-                scripts: options[:scripts] || [],
-                inline_styles: options[:inline_styles],
-                inline_scripts: options[:inline_scripts],
-                meta_options: options[:meta_options] || {}
+                title: options[:title] || "No Title"
               }
             end
 
@@ -93,16 +81,7 @@ module ActiveViewComponent
             class << self
               def generate(options = {})
                 {
-                  description: options[:description] || "Desc",
-                  author: options[:author] || "me",
-                  charset: options[:charset] || "UTF-8",
                   viewport: options[:viewport] || "width=device-width, initial-scale=1",
-                  robots: options[:robots] || "index, follow",
-                  twitter_card: options[:twitter_card] || "summary",
-                  custom_meta: options[:custom_meta] || {},
-                  keywords: options[:keywords],
-                  og_title: options[:og_title],
-                  og_description: options[:og_description],
                   apple_mobile_web_app_capable: options[:apple_mobile_web_app_capable] || "yes",
                   mobile_web_app_capable: options[:mobile_web_app_capable] || "yes"
                 }
@@ -120,10 +99,7 @@ module ActiveViewComponent
         class Body
           class << self
             def generate(options = {})
-              {
-                body_class: options[:body_class],
-                data_attributes: options[:data_attributes] || {}
-              }
+              {}
             end
 
             def create_component(options = {})
