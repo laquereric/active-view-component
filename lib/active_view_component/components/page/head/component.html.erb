@@ -1,23 +1,35 @@
+
 <head>
+
     <title><%= @title %></title>
 
     <% self.parent.child_named(:meta).tap do |child| %>
-    <%= render(child.component) %>
+    <%= render(child.component) if child %>
     <% end %>
 
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<!--
+    undefined method `content_security_policy?' for an instance of ActiveViewComponent::Components::Page::Head::Component
+    < %= csp_meta_tag %>
+-->
 
-    <%= yield :head %>
+<!--
+    no block given (yield)
+    < %= yield :head %>
+-->
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
     <% self.parent.child_named(:link).tap do |child| %>
-    <%= render(child.component) %>
+    <%= render(child.component) if child %>
     <% end %>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+
+<!-- 
+    undefined local variable or method `javascript_importmap_tags' for an instance of ActiveViewComponent::Components::Page::Head::Component
+    < %= javascript_importmap_tags %> 
+-->
 </head>

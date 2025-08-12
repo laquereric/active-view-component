@@ -7,6 +7,10 @@ module ActiveViewComponent
       class Component < ViewComponent::Base
         attr_accessor :parent, :children
 
+        def name
+          self.class.to_s.split("::")[-2].underscore.to_sym
+        end
+
         def initialize(**options)
           super()
           # Initialize from options passed by the generator

@@ -4,12 +4,8 @@ module ActiveViewComponent
     class Node
       attr_accessor :component, :props, :style, :parent, :children
 
-      def name
-        self.class.to_s.split("::")[-2].underscore.to_sym
-      end
-
       def child_named(sym)
-        @children.find { |child| child.name == sym }
+        @children.find { |child| child.component.name == sym }
       end
 
       def prepare(parent: nil)
