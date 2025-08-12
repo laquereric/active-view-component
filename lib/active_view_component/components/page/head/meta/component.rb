@@ -7,7 +7,7 @@ module ActiveViewComponent
         module Meta
           class Component < ActiveViewComponent::Core::Facet::Component
             attr_accessor :robots, :keywords, :description, :author, :charset, :viewport, :twitter_card, :custom_meta,
-                          :og_title, :og_description
+                          :og_title, :og_description, :apple_mobile_web_app_capable, :mobile_web_app_capable
 
             def initialize(**options)
               super()

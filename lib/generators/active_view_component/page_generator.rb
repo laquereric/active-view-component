@@ -102,7 +102,9 @@ module ActiveViewComponent
                   custom_meta: options[:custom_meta] || {},
                   keywords: options[:keywords],
                   og_title: options[:og_title],
-                  og_description: options[:og_description]
+                  og_description: options[:og_description],
+                  apple_mobile_web_app_capable: options[:apple_mobile_web_app_capable] || "yes",
+                  mobile_web_app_capable: options[:mobile_web_app_capable] || "yes"
                 }
               end
 
