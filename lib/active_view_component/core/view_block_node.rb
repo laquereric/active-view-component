@@ -12,16 +12,19 @@ module ActiveViewComponent
 
       def prepare(parent: nil)
         @parent = parent if parent
+        begin
+          # Prepare the component if it responds to prepare
+          @component.prepare_view_block_facet(view_block_parent: self)
 
-        # Prepare the component if it responds to prepare
-        @component.prepare(parent: self) if @component.respond_to?(:prepare)
+          # Prepare the props if it responds to prepare
+          @props.prepare_view_block_facet(view_block_parent: self)
 
-        # Prepare the props if it responds to prepare
-        @props.prepare(parent: self) if @props.respond_to?(:prepare)
-
-        # Prepare the style if it responds to prepare
-        @style.prepare(parent: self) if @style.respond_to?(:prepare)
-
+          # Prepare the style if it responds to prepare
+          @style.prepare_view_block_facet(view_block_parent: self)
+        rescue StandardError => e
+          # Handle any errors that occur during preparation
+          puts "Error preparing view block: #{e.message}"
+        end
         prepare_children
       end
     end
