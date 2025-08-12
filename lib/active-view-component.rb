@@ -15,6 +15,7 @@ require_relative "active_view_component/version"
 require_relative "active_view_component/engine"
 
 require_relative "active_view_component/core/erb_parts"
+require_relative "active_view_component/core/view_block"
 require_relative "active_view_component/core/facet/component"
 require_relative "active_view_component/core/facet/props"
 require_relative "active_view_component/core/facet/style"
