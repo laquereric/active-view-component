@@ -3,11 +3,11 @@
 require "spec_helper"
 require_relative "../lib/active-view-component"
 
-RSpec.describe ActiveViewComponent::Core::ErbParts do
+RSpec.describe ActiveViewComponent::Core::Concern::ErbParts do
   # Create a test component class to test the concern
   let(:test_component_class) do
     Class.new do
-      include ActiveViewComponent::Core::ErbParts
+      include ActiveViewComponent::Core::Concern::ErbParts
 
       erb_attr :title, type: :string, default: "Default Title"
       erb_attr :count, type: :integer

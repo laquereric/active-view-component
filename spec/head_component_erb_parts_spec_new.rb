@@ -8,7 +8,7 @@ RSpec.describe ActiveViewComponent::Components::Page::Head::Component do
 
   describe "ErbParts integration" do
     it "includes ErbParts concern" do
-      expect(component.class.ancestors).to include(ActiveViewComponent::Core::ErbParts)
+      expect(component.class.ancestors).to include(ActiveViewComponent::Core::Concern::ErbParts)
     end
 
     it "defines erb_attr attributes" do

@@ -20,7 +20,7 @@ module ActiveViewComponent
       class Html
         class << self
           def generate(options = {})
-            ActiveViewComponent::Core::Node.new.tap do |node|
+            ActiveViewComponent::Core::Concern::ViewBlockNode.new.tap do |node|
               node.component = ActiveViewComponent::Generator::Page.create_component(options)
               node.props = ActiveViewComponent::Components::Page::Props.new
             end
@@ -33,24 +33,24 @@ module ActiveViewComponent
             meta_options = options[:meta] || {}
             body_options = options[:body] || {}
 
-            ActiveViewComponent::Core::Node.new.tap do |node|
+            ActiveViewComponent::Core::Concern::ViewBlockNode.new.tap do |node|
               node.component = ActiveViewComponent::Generator::Page.create_component(page_options)
               node.props = ActiveViewComponent::Components::Page::Props.new
 
               node.children = [
 
-                ActiveViewComponent::Core::Node.new.tap do |head|
+                ActiveViewComponent::Core::Concern::ViewBlockNode.new.tap do |head|
                   head.component = ActiveViewComponent::Generator::Page::Html::Head.create_component(head_options)
                   head.props = ActiveViewComponent::Components::Page::Head::Props.new
                   head.children = [
-                    ActiveViewComponent::Core::Node.new.tap do |meta|
+                    ActiveViewComponent::Core::Concern::ViewBlockNode.new.tap do |meta|
                       meta.component = ActiveViewComponent::Generator::Page::Html::Head::Meta.create_component(meta_options)
                       meta.props = ActiveViewComponent::Components::Page::Head::Meta::Props.new
                     end
                   ]
                 end,
 
-                ActiveViewComponent::Core::Node.new.tap do |body|
+                ActiveViewComponent::Core::Concern::ViewBlockNode.new.tap do |body|
                   body.component = ActiveViewComponent::Generator::Page::Html::Body.create_component(body_options)
                   body.props = ActiveViewComponent::Components::Page::Body::Props.new
                 end

@@ -7,7 +7,7 @@ module TestApp
   module Components
     module TestComponent
       class Component
-        include ActiveViewComponent::Core::ViewBlock
+        include ActiveViewComponent::Core::Concern::ViewBlock
       end
 
       class Props
@@ -19,7 +19,7 @@ module TestApp
   end
 end
 
-RSpec.describe ActiveViewComponent::Core::ViewBlock do
+RSpec.describe ActiveViewComponent::Core::Concern::ViewBlock do
   describe ".view_block_component_sibling_klass" do
     it "returns the Component class from the same namespace" do
       expect(TestApp::Components::TestComponent::Component.view_block_component_sibling_klass)

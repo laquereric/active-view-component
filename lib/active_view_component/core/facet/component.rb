@@ -5,8 +5,8 @@ module ActiveViewComponent
     module Facet
       # Base class for all components in the ActiveViewComponent framework.
       class Component < ViewComponent::Base
-        include ActiveViewComponent::Core::ErbParts
-        attr_accessor :parent, :children
+        include ActiveViewComponent::Core::Concern::ViewBlock
+        include ActiveViewComponent::Core::Concern::ErbParts
 
         def name
           self.class.to_s.split("::")[-2].underscore.to_sym
@@ -18,18 +18,6 @@ module ActiveViewComponent
           options.each do |key, value|
             instance_variable_set("@#{key}", value) if respond_to?("#{key}=")
           end
-        end
-
-        def prepare(parent: nil)
-          @parent = parent if parent
-          prepare_children(parent: self)
-        end
-
-        def prepare_children(parent: nil)
-          @children ||= []
-
-          # Prepare the children if they respond to prepare
-          @children.each { |child| child.prepare(parent: self) }
         end
       end
     end

@@ -6,7 +6,7 @@ module ActiveViewComponent
       module Head
         # Component for rendering the head section of a page
         class Component < ActiveViewComponent::Core::Facet::Component
-          include ActiveViewComponent::Core::ErbParts
+          include ActiveViewComponent::Core::Concern::ErbParts
 
           # Define ERB attributes for the head component
           erb_attr :title, type: :string, default: "Default Page Title"

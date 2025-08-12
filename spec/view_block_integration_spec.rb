@@ -5,7 +5,7 @@ require "spec_helper"
 # Create a test component that extends the Facet::Component
 module TestNamespace
   class Component < ActiveViewComponent::Core::Facet::Component
-    include ActiveViewComponent::Core::ViewBlock
+    include ActiveViewComponent::Core::Concern::ViewBlock
   end
 
   class Props
@@ -37,11 +37,11 @@ RSpec.describe "ViewBlock integration with Facet::Component" do
 
   describe "ErbParts methods still work" do
     it "includes ErbParts concern" do
-      expect(TestNamespace::Component.ancestors).to include(ActiveViewComponent::Core::ErbParts)
+      expect(TestNamespace::Component.ancestors).to include(ActiveViewComponent::Core::Concern::ErbParts)
     end
 
     it "includes ViewBlock concern" do
-      expect(TestNamespace::Component.ancestors).to include(ActiveViewComponent::Core::ViewBlock)
+      expect(TestNamespace::Component.ancestors).to include(ActiveViewComponent::Core::Concern::ViewBlock)
     end
   end
 end

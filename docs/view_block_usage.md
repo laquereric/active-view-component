@@ -1,6 +1,6 @@
 # ViewBlock Concern Usage Examples
 
-This document demonstrates how to use the `ActiveViewComponent::Core::ViewBlock` concern in your components.
+This document demonstrates how to use the `ActiveViewComponent::Core::Concern::ViewBlock` concern in your components.
 
 ## Overview
 
@@ -15,7 +15,7 @@ module MyApp
   module Components
     module UserProfile
       class Component < ActiveViewComponent::Core::Facet::Component
-        include ActiveViewComponent::Core::ViewBlock
+        include ActiveViewComponent::Core::Concern::ViewBlock
         
         # Now you can use the view_block methods
       end
@@ -89,8 +89,8 @@ The ViewBlock concern works seamlessly with existing ActiveViewComponent compone
 
 ```ruby
 class Component < ActiveViewComponent::Core::Facet::Component
-  include ActiveViewComponent::Core::ErbParts
-  include ActiveViewComponent::Core::ViewBlock
+  include ActiveViewComponent::Core::Concern::ErbParts
+  include ActiveViewComponent::Core::Concern::ViewBlock
   
   erb_attr :title, type: :string
   

@@ -1,12 +1,12 @@
 # ErbParts Concern Usage Examples
 
-This document demonstrates how to use the `ActiveViewComponent::Core::ErbParts` concern in your components.
+This document demonstrates how to use the `ActiveViewComponent::Core::Concern::ErbParts` concern in your components.
 
 ## Basic Usage
 
 ```ruby
 class MyComponent < ActiveViewComponent::Core::Facet::Component
-  include ActiveViewComponent::Core::ErbParts
+  include ActiveViewComponent::Core::Concern::ErbParts
 
   # Define ERB attributes with type coercion and defaults
   erb_attr :title, type: :string, default: "Default Title"
@@ -45,7 +45,7 @@ puts component.title?   # true (attribute is set)
 
 ```ruby
 class HeadComponent < ActiveViewComponent::Core::Facet::Component
-  include ActiveViewComponent::Core::ErbParts
+  include ActiveViewComponent::Core::Concern::ErbParts
 
   # Page metadata attributes
   erb_attr :title, type: :string, default: "Default Page Title"

@@ -1,8 +1,10 @@
 module ActiveViewComponent
   module Core
     # Represents a node in the component tree.
-    class Node
-      attr_accessor :component, :props, :style, :parent, :children
+    class ViewBlockNode
+      include ActiveViewComponent::Core::Concern::NodeHier
+
+      attr_accessor :component, :props, :style
 
       def child_named(sym)
         @children.find { |child| child.component.name == sym }
@@ -20,12 +22,7 @@ module ActiveViewComponent
         # Prepare the style if it responds to prepare
         @style.prepare(parent: self) if @style.respond_to?(:prepare)
 
-        prepare_children(parent: self)
-      end
-
-      def prepare_children(parent: nil)
-        @children ||= []
-        @children.each { |child| child.prepare(parent: self) }
+        prepare_children
       end
     end
   end

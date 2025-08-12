@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe "ViewBlock with existing Meta component" do
   # Add ViewBlock to the existing Meta component for testing
   before do
-    ActiveViewComponent::Components::Page::Head::Meta::Component.include(ActiveViewComponent::Core::ViewBlock)
+    ActiveViewComponent::Components::Page::Head::Meta::Component.include(ActiveViewComponent::Core::Concern::ViewBlock)
   end
 
   describe "ViewBlock methods on existing Meta::Component" do

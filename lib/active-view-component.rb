@@ -14,12 +14,13 @@ end
 require_relative "active_view_component/version"
 require_relative "active_view_component/engine"
 
-require_relative "active_view_component/core/erb_parts"
-require_relative "active_view_component/core/view_block"
+require_relative "active_view_component/core/concern/erb_parts"
+require_relative "active_view_component/core/concern/view_block"
+require_relative "active_view_component/core/concern/node_hier"
 require_relative "active_view_component/core/facet/component"
 require_relative "active_view_component/core/facet/props"
 require_relative "active_view_component/core/facet/style"
-require_relative "active_view_component/core/node"
+require_relative "active_view_component/core/view_block_node"
 
 require_relative "active_view_component/components/page/head/meta/component"
 require_relative "active_view_component/components/page/head/meta/props"

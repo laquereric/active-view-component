@@ -5,7 +5,7 @@ module ActiveViewComponent
     module Facet
       # Props for the component
       class Props < Hash
-        attr_accessor :parent, :children
+        include ActiveViewComponent::Core::Concern::ViewBlock
 
         def self.component_class
           [self.class.module_parent_name, "Component"].join("::").constantize
@@ -31,18 +31,6 @@ module ActiveViewComponent
           options.each do |key, value|
             instance_variable_set("@#{key}", value) if component_attribute_keys.include?("#{key}=")
           end
-        end
-
-        def prepare(parent: nil)
-          @parent = parent if parent
-          prepare_children(parent: self)
-        end
-
-        def prepare_children(parent: nil)
-          @children ||= []
-
-          # Prepare the children if they respond to prepare
-          @children.each { |child| child.prepare(parent: self) }
         end
       end
     end
