@@ -68,6 +68,10 @@ module ActiveViewComponent
           end
           result
         end
+
+        def view_block_children_labeled(label:)
+          @view_block_children.filter { |child| child.label == label }
+        end
       end
     end
   end

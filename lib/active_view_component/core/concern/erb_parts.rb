@@ -22,7 +22,15 @@ module ActiveViewComponent
 
             # Define getter method
             define_method(name) do
-              instance_variable_get("@#{name}")
+              #  instance_variable_get("@#{name}")
+              case options[:type]
+              when :view_block_child
+                view_block_children_labeled(label: name).map do |child|
+                  render(child.component)
+                end
+              else
+                !instance_variable_get("@#{name}").nil?
+              end
             end
 
             # Define setter method
@@ -36,6 +44,8 @@ module ActiveViewComponent
                   value = !!value
                 when :string
                   value = value.to_s
+                when :view_block_child
+                  value = "calculated_value"
                 end
               end
 
@@ -44,7 +54,13 @@ module ActiveViewComponent
 
             # Define helper method to check if attribute is set
             define_method("#{name}?") do
-              !instance_variable_get("@#{name}").nil?
+              p options[:type]
+              case options[:type]
+              when :view_block_child
+                !instance_variable_get("@#{name}") == "calculated_value"
+              else
+                !instance_variable_get("@#{name}").nil?
+              end
             end
           end
 

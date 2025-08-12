@@ -10,14 +10,18 @@ module ActiveViewComponent
 
         included do
           attr_accessor :view_block_parent
+        end
 
-          def prepare_view_block_facet(view_block_parent:)
-            @view_block_parent = view_block_parent
-          end
+        def prepare_view_block_facet(view_block_parent:)
+          @view_block_parent = view_block_parent
+        end
 
-          def view_block_children
-            view_block_parent.children
-          end
+        def view_block_children
+          view_block_parent.children
+        end
+
+        def view_block_children_labeled(label:)
+          view_block_children.select { |child| child.label == label }
         end
 
         class_methods do

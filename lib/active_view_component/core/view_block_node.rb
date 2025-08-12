@@ -5,9 +5,10 @@ module ActiveViewComponent
       include ActiveViewComponent::Core::Concern::NodeHier
 
       attr_accessor :component, :props, :style
+      attr_writer :label
 
-      def child_named(sym)
-        @children.find { |child| child.component.name == sym }
+      def label
+        @label || @component.name
       end
 
       def prepare(parent: nil)
