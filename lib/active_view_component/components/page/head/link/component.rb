@@ -6,7 +6,6 @@ module ActiveViewComponent
       module Head
         module Link
           class Component < ActiveViewComponent::Core::Facet::Component
-            # attr_accessor
           end
         end
       end

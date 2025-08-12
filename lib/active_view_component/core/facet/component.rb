@@ -5,6 +5,7 @@ module ActiveViewComponent
     module Facet
       # Base class for all components in the ActiveViewComponent framework.
       class Component < ViewComponent::Base
+        include ActiveViewComponent::Core::ErbParts
         attr_accessor :parent, :children
 
         def name
