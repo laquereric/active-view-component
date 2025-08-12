@@ -1,32 +1,5 @@
-<!--  lang="< % = @style.lang %>" dir="< % = @style.dir %>" < % = @style.html_attributes.map { |key, value| "#{key}=\"#{value}\"" }.join(' ').html_safe %>> 
-    < %= 
-      render(self.children[0])
-    %>
-    <br/>
-    < %= 
-      render(self.children[1])
-    %>
-    < %= render(child.component) %>
--->
-<%= self %><br/>
-<%= self.parent.children.length %><br/>
-
-<% self.parent.children.each do |child| %>
-  child:<br/>
-  <%= child.component %><br/>
-  <%= render(child.component) %><br/>
-<% end %>
-
 <html>
-
-Hello
-
-<!--
-  < % = 
-    render( @component.with_body_content ) do |body_component|
-      body_component.props = body_props
-    end
-  % >
-  -->
-
+<% self.parent.children.each do |child| %>
+<%= render(child.component) %>
+<% end %>
 </html>

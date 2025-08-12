@@ -1,8 +1,5 @@
-<!-- Title: < %= props[:title] %> -->
 <body>
-  Body<br/>
-  
-  <!-- class="< % = @component.style.class %>" -->
-  <!-- < %= data_attributes.map { |key, value| "data-#{key}=\"#{value}\"" }.join(' ').html_safe -->
-  <!-- < %= @content %> -->
+<% self.parent.children.each do |child| %>
+<%= render(child.component) %>
+<% end %>
 </body>

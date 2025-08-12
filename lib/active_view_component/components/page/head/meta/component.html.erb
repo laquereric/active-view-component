@@ -1,23 +1,14 @@
-Meta
 <meta name="author" content="<%= author %>">
 <meta charset="<%= charset %>">
-
 <meta name="viewport" content="<%=viewport %>">
-
 <meta name="description" content="<%= description %>">
 <meta name="keywords" content="<%= keywords %>">
-
-
 <meta name="robots" content="<%= @robots %>">
-
 <meta property="og:title" content="<%= @og_title %>">
 <meta property="og:description" content="<%= @og_description %>">
 <meta property="og:image" content="<%= @og_image %>">
 <meta property="og:url" content="<%= @og_url %>">
-
 <meta name="twitter:card" content="<%= @twitter_card %>">
-
 <% @custom_meta.each do |name, content| %>
   <meta name="<%= name %>" content="<%= content %>">
-<% end %> 
-
+<% end %>

@@ -1,12 +1,5 @@
-  <!--   < % content %> -->
 <head>
-  Head
-  <% self.parent.children.each do |child| %>
-    child:<br/>
-    <%= child.component %><br/>
-    <%= render(child.component) %><br/>
-  <% end %>
+<% self.parent.children.each do |child| %>
+<%= render(child.component) %>
+<% end %>
 </head>
-  
-  
-
