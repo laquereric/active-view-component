@@ -14,16 +14,17 @@ module ActiveViewComponent
           )
 
           generator_klass.create_sub_view_blocks(
-            file: __FILE__,
+            file: file,
             parent_view_block_node: view_block_node
           )
-          
+
           view_block_node
         end
 
         def self.create_sub_view_blocks(file:, parent_view_block_node: view_block_node)
-          peer_folders(file: __FILE__).each do |module_name|
-            view_block_generator_for(klassname: module_name).create_view_block(parent_view_block_node: view_block_node)
+          peer_folders(file: file).each do |module_name|
+            p "peer module_name: #{module_name}"
+            view_block_generator_for(klassname: module_name).create_view_block(parent_view_block_node: parent_view_block_node)
           end
         end
       end
