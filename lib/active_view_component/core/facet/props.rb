@@ -6,9 +6,9 @@ module ActiveViewComponent
       # Props for the component
       class Props < Hash
         include ActiveViewComponent::Core::Concern::ViewBlock
-        def initialize(view_block_parent:)
+        def initialize(view_block_node:)
           super()
-          set_view_block_parent(view_block_parent: view_block_parent)
+          set_view_block_node(view_block_node: view_block_node)
         end
       end
     end

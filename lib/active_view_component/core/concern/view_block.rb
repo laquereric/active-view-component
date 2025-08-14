@@ -9,15 +9,15 @@ module ActiveViewComponent
         extend ActiveSupport::Concern
 
         included do
-          attr_accessor :view_block_parent
+          attr_accessor :view_block_node
         end
 
-        def set_view_block_parent(view_block_parent:)
-          @view_block_parent = view_block_parent
+        def set_view_block_node(view_block_node:)
+          @view_block_node = view_block_node
         end
 
         def view_block_children
-          @view_block_parent.children || []
+          @view_block_node.children || []
         end
 
         class_methods do

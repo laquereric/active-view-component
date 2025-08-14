@@ -12,9 +12,9 @@ module ActiveViewComponent
           attr_accessor :parent, :children
         end
 
-        def setup_view_block_node_hier(parent_view_block_node:)
-          @parent = parent_view_block_node
-          parent_view_block_node.add_child(self)
+        def setup_view_block_node_hier(view_block_node:)
+          @parent = view_block_node
+          view_block_node.add_child(self)
         end
 
         # Add a child to this component

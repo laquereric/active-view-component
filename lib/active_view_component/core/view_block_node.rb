@@ -9,13 +9,13 @@ module ActiveViewComponent
 
       def initialize(
         generator_klass:,
-        parent_view_block_node: nil
+        view_block_node: nil
       )
-        setup_view_block_node_hier(parent_view_block_node: parent_view_block_node) if parent_view_block_node
+        setup_view_block_node_hier(view_block_node: view_block_node) if view_block_node
 
-        @component = generator_klass.view_block_component_sibling_klass.new(view_block_parent: self)
-        @props = generator_klass.view_block_props_sibling_klass.new(view_block_parent: self)
-        @style = generator_klass.view_block_style_sibling_klass.new(view_block_parent: self)
+        @component = generator_klass.view_block_component_sibling_klass.new(view_block_node: self)
+        @props = generator_klass.view_block_props_sibling_klass.new(view_block_node: self)
+        @style = generator_klass.view_block_style_sibling_klass.new(view_block_node: self)
       end
 
       def label

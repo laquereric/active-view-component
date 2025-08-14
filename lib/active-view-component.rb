@@ -28,14 +28,17 @@ require_relative "active_view_component/core/view_block_node"
 
 require_relative "active_view_component/component/page/head/meta/component"
 require_relative "active_view_component/component/page/head/meta/props"
+require_relative "active_view_component/component/page/head/meta/style"
 require_relative "active_view_component/component/page/head/meta/generator"
 
 require_relative "active_view_component/component/page/head/component"
 require_relative "active_view_component/component/page/head/props"
+require_relative "active_view_component/component/page/head/style"
 require_relative "active_view_component/component/page/head/generator"
 
 require_relative "active_view_component/component/page/body/component"
 require_relative "active_view_component/component/page/body/props"
+require_relative "active_view_component/component/page/body/style"
 require_relative "active_view_component/component/page/body/generator"
 
 require_relative "active_view_component/component/page/component"
