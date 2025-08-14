@@ -12,16 +12,12 @@ module ActiveViewComponent
           attr_accessor :view_block_parent
         end
 
-        def prepare_view_block_facet(view_block_parent:)
+        def set_view_block_parent(view_block_parent:)
           @view_block_parent = view_block_parent
         end
 
         def view_block_children
-          view_block_parent.children
-        end
-
-        def view_block_children_labeled(label:)
-          view_block_children.select { |child| child.label == label }
+          @view_block_parent.children || []
         end
 
         class_methods do
@@ -31,6 +27,10 @@ module ActiveViewComponent
 
           def view_block_klass(klassname:)
             [view_block_namespace, klassname].join("::").constantize
+          end
+
+          def view_block_generator_for(klassname:)
+            [view_block_namespace, klassname, "Generator"].join("::").constantize
           end
 
           # Returns the sibling Component class
@@ -52,6 +52,10 @@ module ActiveViewComponent
           # to determine the component namespace and return the Style class
           def view_block_style_sibling_klass
             view_block_klass(klassname: "Style")
+          end
+
+          def view_block_generator_sibling_klass
+            view_block_klass(klassname: "Generator")
           end
         end
       end

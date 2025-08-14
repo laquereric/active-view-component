@@ -8,16 +8,9 @@ module ActiveViewComponent
         include ActiveViewComponent::Core::Concern::ViewBlock
         include ActiveViewComponent::Core::Concern::ErbParts
 
-        def name
-          self.class.to_s.split("::")[-2].underscore.to_sym
-        end
-
-        def initialize(**options)
+        def initialize(view_block_parent:)
           super()
-          # Initialize from options passed by the generator
-          options.each do |key, value|
-            instance_variable_set("@#{key}", value) if respond_to?("#{key}=")
-          end
+          set_view_block_parent(view_block_parent: view_block_parent)
         end
       end
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ActiveViewComponent
-  module Components
+  module Component
     module Page
       module Head
         # Component for rendering the head section of a page

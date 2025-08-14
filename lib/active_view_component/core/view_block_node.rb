@@ -7,26 +7,19 @@ module ActiveViewComponent
       attr_accessor :component, :props, :style
       attr_writer :label
 
-      def label
-        @label || @component.name
+      def initialize(
+        generator_klass:,
+        parent_view_block_node: nil
+      )
+        setup_view_block_node_hier(parent_view_block_node: parent_view_block_node) if parent_view_block_node
+
+        @component = generator_klass.view_block_component_sibling_klass.new(view_block_parent: self)
+        @props = generator_klass.view_block_props_sibling_klass.new(view_block_parent: self)
+        @style = generator_klass.view_block_style_sibling_klass.new(view_block_parent: self)
       end
 
-      def prepare(parent: nil)
-        @parent = parent if parent
-        begin
-          # Prepare the component if it responds to prepare
-          @component.prepare_view_block_facet(view_block_parent: self)
-
-          # Prepare the props if it responds to prepare
-          @props.prepare_view_block_facet(view_block_parent: self)
-
-          # Prepare the style if it responds to prepare
-          @style.prepare_view_block_facet(view_block_parent: self)
-        rescue StandardError => e
-          # Handle any errors that occur during preparation
-          puts "Error preparing view block: #{e.message}"
-        end
-        prepare_children
+      def label
+        @label || @component.name
       end
     end
   end

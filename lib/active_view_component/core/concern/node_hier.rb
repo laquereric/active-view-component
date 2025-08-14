@@ -12,27 +12,9 @@ module ActiveViewComponent
           attr_accessor :parent, :children
         end
 
-        # Prepare the node and its children for rendering
-        # @param parent [Object] The parent object to set for this component
-        def prepare(parent: nil)
-          @parent = parent if parent
-          prepare_children
-        end
-
-        # Prepare all children components
-        def prepare_children
-          @children ||= []
-
-          # Prepare the children if they respond to prepare
-          @children.each { |child| child.prepare(parent: self) }
-        end
-
-        # Find a child component by its name
-        # @param sym [Symbol] The name of the child component to find
-        # @return [Object, nil] The child component or nil if not found
-        def child_named(sym)
-          @children ||= []
-          @children.find { |child| child.respond_to?(:name) && child.name == sym }
+        def setup_view_block_node_hier(parent_view_block_node:)
+          @parent = parent_view_block_node
+          parent_view_block_node.add_child(self)
         end
 
         # Add a child to this component
@@ -57,19 +39,7 @@ module ActiveViewComponent
           !!(@children && !@children.empty?)
         end
 
-        # Get all descendants (children, grandchildren, etc.)
-        # @return [Array] Array of all descendant components
-        def descendants
-          result = []
-          @children ||= []
-          @children.each do |child|
-            result << child
-            result.concat(child.descendants) if child.respond_to?(:descendants)
-          end
-          result
-        end
-
-        def view_block_children_labeled(label:)
+        def children_labeled(label:)
           @view_block_children.filter { |child| child.label == label }
         end
       end

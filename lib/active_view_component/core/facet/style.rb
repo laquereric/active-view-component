@@ -9,17 +9,9 @@ module ActiveViewComponent
 
         attr_accessor :html_attributes, :dir, :stylesheets, :scripts, :lang, :charset, :viewport, :inline_styles
 
-        def initialize(html_attributes: {}, dir: "ltr", stylesheets: [], scripts: [], lang: "en", charset: "utf-8",
-                       viewport: "width=device-width, initial-scale=1", **options)
-          @html_attributes = html_attributes
-          @dir = dir
-          @stylesheets = stylesheets
-          @inline_styles = ""
-          @scripts = scripts
-          @lang = lang
-          @charset = charset
-          @viewport = viewport
-          @options = options
+        def initialize(view_block_parent:)
+          super()
+          set_view_block_parent(view_block_parent: view_block_parent)
         end
       end
     end

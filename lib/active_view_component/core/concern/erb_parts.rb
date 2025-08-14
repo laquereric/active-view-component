@@ -25,7 +25,7 @@ module ActiveViewComponent
               #  instance_variable_get("@#{name}")
               case options[:type]
               when :view_block_child
-                view_block_children_labeled(label: name).map do |child|
+                children_labeled(label: name).map do |child|
                   render(child.component)
                 end
               else
