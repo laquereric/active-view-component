@@ -3,9 +3,9 @@ module ActiveViewComponent
     module Page
       # Generates the default page structure
       class Generator < Core::Facet::Generator
-        def self.create_root_view_block
-          p "#{self} calling create_root_view_block"
-          create_root_view_block_hier(generator_klass: self, file: __FILE__, view_block_node: view_block_node)
+        def set_file
+          @file = __FILE__
+          self
         end
       end
     end

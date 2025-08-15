@@ -4,9 +4,9 @@ module ActiveViewComponent
       module Body
         # Generates the default page structure
         class Generator < ActiveViewComponent::Core::Facet::Generator
-          def self.create_sub_view_block_s(view_block_node:)
-            p "#{self} create_sub_view_block_s"
-            create_sub_view_block_s_hier(generator_klass: self, file: __FILE__, view_block_node: view_block_node)
+          def set_file
+            @file = __FILE__
+            self
           end
         end
       end
