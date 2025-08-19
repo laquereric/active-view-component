@@ -5,9 +5,9 @@ module ActiveViewComponent
         module Link
           # Generates the default page structure
           class Generator < ActiveViewComponent::Core::Facet::Generator
-            def set_file
-              @file = __FILE__
-              self
+            def set_generator_file
+                @generator_file = __FILE__
+                self
             end
           end
         end

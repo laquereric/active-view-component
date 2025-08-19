@@ -7,10 +7,9 @@ module ActiveViewComponent
       class Component < ViewComponent::Base
         include ActiveViewComponent::Core::Concern::ViewBlock
         include ActiveViewComponent::Core::Concern::ErbParts
-
-        def initialize(view_block_node:)
-          super()
-          set_view_block_node(view_block_node: view_block_node)
+        def initialize
+          p "#{self} initialize"
+          super
         end
       end
     end

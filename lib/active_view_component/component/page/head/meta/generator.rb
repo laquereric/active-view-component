@@ -5,10 +5,10 @@ module ActiveViewComponent
         module Meta
           # Generates the default page structure
           class Generator < ActiveViewComponent::Core::Facet::Generator
-            def set_file
-              @file = __FILE__
-              self
-            end
+            def set_generator_file
+                @generator_file = __FILE__
+                self
+              end
           end
         end
       end

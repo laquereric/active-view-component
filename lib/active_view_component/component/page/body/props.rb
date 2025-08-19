@@ -2,7 +2,7 @@ module ActiveViewComponent
   module Component
     module Page
       module Body
-        class Props
+        class Props < ActiveViewComponent::Core::Facet::Props
           attr_accessor :body_class, :data_attributes, :content, :total_users, :online_users, :offline_users,
                         :total_rooms, :recent_activity, :active_rooms, :popular_rooms, :recent_users
           #           def initialize(body_class: nil, data_attributes: {})

@@ -6,30 +6,98 @@ module ActiveViewComponent
         include ActiveViewComponent::Core::Concern::ViewBlock
         include ActiveViewComponent::Core::Concern::Files
 
-        attr_accessor :file
+        attr_accessor :generator_file, :children, :view_block
 
-        def self.create_root_view_block
-          new.set_file.create_root_view_block
+        def initialize
+          p "#{self} initialize"
+          set_generator_file
+          super
         end
 
-        def self.create_children_from(view_block_node:)
-          new.set_file.create_children_from(view_block_node: view_block_node)
+        def set_generator_file
+          raise "Must override"
         end
+        
+        def setup_root
+          p "setup_root"
+          view_block = Core::ViewBlockNode.create(generator: self)
+          setup_parent(view_block: view_block)
+        end
+
+        def setup_child(view_block:)
+          p "#{self} setup_child"
+          setup_parent(view_block: view_block)
+        end
+
+        #####
+
+        # Setup relationship between this view block and its parent
+        def setup_parent(view_block:)
+          p "#{self} setup_parent"
+          raise "view_block nil!" unless view_block
+          @view_block = view_block
+
+          view_block.component = self.class.view_block_component_sibling_klass.new.set_view_block(view_block: view_block)
+          view_block.props = self.class.view_block_props_sibling_klass.new.set_view_block(view_block: view_block)
+          view_block.style = self.class.view_block_style_sibling_klass.new.set_view_block(view_block: view_block)
+  
+          raise " @generator_file is nil. Set in set_generator_file method" unless @generator_file
+
+          get_children
+          parent_children
+
+          self
+        end
+
+        private
 
         # NOTE: initialize overriden per subclass - so @file set
-
-        def create_root_view_block
-          p "#{self} calling Core::ViewBlockNode.create_root with file: #{file}"
-          Core::ViewBlockNode.create_root(generator_klass: self.class, file: file)
+        
+        def child_generator(module_name:)
+          p "#{self} child_generator #{module_name}"
+          self
+            .class
+            .view_block_generator_for(klassname: module_name)
+            .new
+        end
+        
+        def child_view_node(child_generator:)
+          p "#{self} child_view_node #{child_generator}"
+          Core::ViewBlockNode.create(generator_klass: child_generator.class, generator_file: child_generator.generator_file)
         end
 
-        def create_children_from(view_block_node:)
-          p "#{self} calling Core::ViewBlockNode.create_children_from with file: #{file}"
-          peer_folders.each do |module_name|
-            self.class.view_block_generator_for(klassname: module_name).create_children_from(view_block_node: view_block_node)
-          rescue StandardError => e
-            p "Error in creating create_children_from called from #{self} to #{module_name}: #{e.message}. Continuing..."
+        def generate_child(module_name:)
+          p "#{self} generate_child #{module_name}"
+          generator = child_generator(module_name: module_name)
+          view_block = Core::ViewBlockNode.create(generator: generator)
+          generator.setup_child(view_block: view_block)
+        end
+
+        def get_children
+          p "#{self} get_children"
+          @children = peer_folders.map do |module_name|
+            begin
+              self.generate_child(module_name: module_name)
+              
+            rescue StandardError => e
+              p "Error in creating get_children from #{self} to #{module_name}: #{e.message}. Continuing..."
+            end
           end
+          self
+        end
+
+        # Link every child node to view_block (self), its parent
+        def parent_children
+          p "#{self} parent_children"
+          @children.map do |child|
+            begin
+              view_block.add_child(child)
+              child
+            rescue StandardError => e
+              p "Error in creating child from #{self} to #{child}: #{e.message}. Continuing..."
+            end
+          end
+          self
         end
       end
     end

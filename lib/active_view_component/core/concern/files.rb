@@ -16,7 +16,7 @@ module ActiveViewComponent
         end
 
         def peer_folders
-          folder_name = file.split("/")[0..-2].join("/")
+          folder_name = generator_file.split("/")[0..-2].join("/")
           glob_string = [folder_name, "/", "*"].join
           
           all = Dir.glob(glob_string)
