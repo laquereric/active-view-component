@@ -8,6 +8,11 @@ module ActiveViewComponent
         include ActiveViewComponent::Core::Concern::ViewBlock
 
         attr_accessor :html_attributes, :dir, :stylesheets, :scripts, :lang, :charset, :viewport, :inline_styles
+        
+        def initialize
+          p "#{self} initialize"
+          super
+        end
       end
     end
   end

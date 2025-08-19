@@ -1,7 +1,7 @@
 module ActiveViewComponent
   module Component
     module Page
-      class Props < ActiveViewComponent::Core::Facet::Component
+      class Props < ActiveViewComponent::Core::Facet::Props
         # attr_accessor :head_props, :body_props
         # :total_users, :online_users, :offline_users, :total_rooms, :recent_activity, :active_rooms,
         #              :popular_rooms, :recent_users

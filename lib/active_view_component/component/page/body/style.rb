@@ -5,7 +5,7 @@ module ActiveViewComponent
     module Page
       module Body
         # Props for the body component
-        class Style < ActiveViewComponent::Core::Facet::Style
+        class Style < Core::Facet::Style
         end
       end
     end

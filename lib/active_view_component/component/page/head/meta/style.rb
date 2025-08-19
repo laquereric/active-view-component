@@ -3,7 +3,7 @@ module ActiveViewComponent
     module Page
       module Head
         module Meta
-          class Style < ActiveViewComponent::Core::Facet::Style
+          class Style < Core::Facet::Style
           end
         end
       end

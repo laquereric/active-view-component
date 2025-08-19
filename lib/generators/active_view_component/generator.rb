@@ -9,7 +9,6 @@ module ActiveViewComponent
     
     def self.create_page_component_with(generator_klass: Component::Page::Generator)
       p "#{self} calling setup_root on #{generator_klass}"
-      binding.pry
       generator_klass.new.setup_root.view_block.component
     end
 

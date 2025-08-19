@@ -37,9 +37,21 @@ module ActiveViewComponent
           raise "view_block nil!" unless view_block
           @view_block = view_block
 
-          view_block.component = self.class.view_block_component_sibling_klass.new.set_view_block(view_block: view_block)
-          view_block.props = self.class.view_block_props_sibling_klass.new.set_view_block(view_block: view_block)
-          view_block.style = self.class.view_block_style_sibling_klass.new.set_view_block(view_block: view_block)
+          view_block.component = self
+            .class.view_block_component_sibling_klass
+            .new
+            .set_view_block(view_block: view_block)
+  
+          view_block.props = self
+            .class
+            .view_block_props_sibling_klass
+            .new
+            .set_view_block(view_block: view_block)
+
+          view_block.style = self
+            .class.view_block_style_sibling_klass
+            .new
+            .set_view_block(view_block: view_block)
   
           raise " @generator_file is nil. Set in set_generator_file method" unless @generator_file
 
@@ -70,7 +82,9 @@ module ActiveViewComponent
           p "#{self} generate_child #{module_name}"
           generator = child_generator(module_name: module_name)
           view_block = Core::ViewBlockNode.create(generator: generator)
-          generator.setup_child(view_block: view_block)
+          generator
+            .setup_child(view_block: view_block)
+            .view_block
         end
 
         def get_children

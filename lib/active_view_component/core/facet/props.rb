@@ -4,8 +4,9 @@ module ActiveViewComponent
   module Core
     module Facet
       # Props for the component
-      class Props < Hash
+      class Props
         include ActiveViewComponent::Core::Concern::ViewBlock
+
         def initialize
           p "#{self} initialize"
           super

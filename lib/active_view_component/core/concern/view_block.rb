@@ -14,6 +14,7 @@ module ActiveViewComponent
 
         def set_view_block(view_block:)
           @view_block = view_block
+          self
         end
 
         def view_block_children

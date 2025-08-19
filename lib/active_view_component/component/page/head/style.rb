@@ -3,7 +3,7 @@ module ActiveViewComponent
     module Page
       module Head
         # Props for the head component
-        class Style < ActiveViewComponent::Core::Facet::Style
+        class Style < Core::Facet::Style
         end
       end
     end
