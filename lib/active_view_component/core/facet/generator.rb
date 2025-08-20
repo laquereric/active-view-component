@@ -38,7 +38,8 @@ module ActiveViewComponent
           @view_block = view_block
 
           view_block.component = self
-            .class.view_block_component_sibling_klass
+            .class
+            .view_block_component_sibling_klass
             .new
             .set_view_block(view_block: view_block)
   

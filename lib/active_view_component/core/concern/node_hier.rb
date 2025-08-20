@@ -15,7 +15,6 @@ module ActiveViewComponent
         def setup_as_child_of(view_block:)
           @parent = view_block
           @parent.add_child(self)
-          binding.pry
           self
         end
 
@@ -38,11 +37,15 @@ module ActiveViewComponent
         # Check if this component has any children
         # @return [Boolean] true if the component has children, false otherwise
         def has_children?
-          !!(@children && !@children.empty?)
+          !!(children && !children.empty?)
+        end
+        
+        def children_select(&block)
+          children.select { |child|  yield(child) }
         end
 
         def children_labeled(label:)
-          @view_block_children.filter { |child| child.label == label }
+          children_select { |child| child.label == label }
         end
       end
     end

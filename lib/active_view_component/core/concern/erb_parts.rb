@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# ErbParts
+# 
+# - is a concern that provides ERB template helpers for components
+
 module ActiveViewComponent
   module Core
     module Concern
@@ -25,7 +29,8 @@ module ActiveViewComponent
               #  instance_variable_get("@#{name}")
               case options[:type]
               when :view_block_child
-                children_labeled(label: name).map do |child|
+
+                view_block.children_labeled(label: name).map do |child|
                   render(child.component)
                 end
               else

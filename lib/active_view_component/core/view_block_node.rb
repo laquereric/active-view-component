@@ -5,7 +5,6 @@ module ActiveViewComponent
       include ActiveViewComponent::Core::Concern::NodeHier
 
       attr_accessor :generator, :component, :props, :style
-      attr_writer :label
 
       def self.create(generator:)
         new(generator: generator)
@@ -16,7 +15,7 @@ module ActiveViewComponent
       end
 
       def label
-        @label || @component.name
+        component.class.to_s.split('::')[-2].downcase
       end
 
     end

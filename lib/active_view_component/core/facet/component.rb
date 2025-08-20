@@ -7,10 +7,12 @@ module ActiveViewComponent
       class Component < ViewComponent::Base
         include ActiveViewComponent::Core::Concern::ViewBlock
         include ActiveViewComponent::Core::Concern::ErbParts
+
         def initialize
           p "#{self} initialize"
           super
         end
+
       end
     end
   end
